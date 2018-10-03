@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+// 轮播图
+            var left = $(".new_post>.left");
+            var right = $(".new_post>.right");
+            var n = $(".new_post_banner ul li").length;
+            var ul_length = $(".new_post_banner").outerWidth();
+            var s=0;
+            left.click(function(){
+                if(s==1){
+                    return false;
+                }
+                s= 1;
+                $(".new_post_banner ul").animate({marginLeft:-ul_length-10+'px'},1000,function(){  //10为li元素的外边距 如果此处大于10会有震荡效果
+                    for(i=0;i<4;i++){
+                        $(".new_post_banner ul>li").eq(0).appendTo(".new_post_banner ul");
+                        $(".new_post_banner ul").css("marginLeft","0px");
+                    }
+                    s=0;
+                });
+            });
+            right.click(function(){
+                if(s==1){
+                    return false;
+                }
+                s=1;
+                for(i=0;i<4;i++){
+                    $(".new_post_banner ul>li").eq(n-1).prependTo(".new_post_banner ul");
+                }
+                $(".new_post_banner ul").css("marginLeft",-ul_length-10+'px');
+                $(".new_post_banner ul").animate({marginLeft:"0px"},1000,function(){
+                    s=0;
+                });
+            });
+        })
+
+    </script>
+</head>
+<body>
+<div class="new_post">
+    <div class="title clearfix">
+        <a href="">
+            <h3>新品首发</h3>
+        </a>
+        <small>周一周四上新，为你寻觅世间好物</small>
+        <a href="" class="more">更多新品 <b>></b></a>
+    </div>
+    <div class="new_post_banner">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+    </div>
+    <span class="left new_left"></span>
+    <span class="right new_right"></span>
+</div>
+
+</body>
+</html>
